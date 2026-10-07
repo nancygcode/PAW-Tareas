@@ -1,0 +1,24 @@
+﻿@model PAW.Models.DTO.SupplierDTO
+
+<dl class="row mb-0">
+    <dt class="col-sm-4">Supplier ID</dt>
+    <dd class="col-sm-8">@Model.SupplierId</dd>
+    <dt class="col-sm-4">Supplier Name</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.SupplierName) ? "—" : Model.SupplierName)</dd>
+    <dt class="col-sm-4">Contact Name</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.ContactName) ? "—" : Model.ContactName)</dd>
+    <dt class="col-sm-4">Contact Title</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.ContactTitle) ? "—" : Model.ContactTitle)</dd>
+    <dt class="col-sm-4">Phone</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Phone) ? "—" : Model.Phone)</dd>
+    <dt class="col-sm-4">Address</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Address) ? "—" : Model.Address)</dd>
+    <dt class="col-sm-4">City</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.City) ? "—" : Model.City)</dd>
+    <dt class="col-sm-4">Country</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Country) ? "—" : Model.Country)</dd>
+    <dt class="col-sm-4">Last Modified</dt>
+    <dd class="col-sm-8">@(Model.LastModified?.ToString("yyyy-MM-dd HH:mm") ?? "—")</dd>
+    <dt class="col-sm-4">Modified By</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.ModifiedBy) ? "—" : Model.ModifiedBy)</dd>
+</dl>

@@ -1,0 +1,22 @@
+﻿@model PAW.Models.DTO.UserDTO
+
+<dl class="row mb-0">
+    <dt class="col-sm-4">User ID</dt>
+    <dd class="col-sm-8">@Model.UserId</dd>
+    <dt class="col-sm-4">Username</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Username) ? "—" : Model.Username)</dd>
+    <dt class="col-sm-4">Email</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Email) ? "—" : Model.Email)</dd>
+    <dt class="col-sm-4">Is Active</dt>
+    <dd class="col-sm-8">@(Model.IsActive == true ? "Yes" : "No")</dd>
+    <dt class="col-sm-4">Role</dt>
+    <dd class="col-sm-8">@(Model.RoleId?.ToString() ?? "—")</dd>
+    <dt class="col-sm-4">Created At</dt>
+    <dd class="col-sm-8">@(Model.CreatedAt?.ToString("yyyy-MM-dd HH:mm") ?? "—")</dd>
+    <dt class="col-sm-4">Last Modified</dt>
+    <dd class="col-sm-8">@(Model.LastModified?.ToString("yyyy-MM-dd HH:mm") ?? "—")</dd>
+    <dt class="col-sm-4">Modified By</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.ModifiedBy) ? "—" : Model.ModifiedBy)</dd>
+    <dt class="col-sm-4">Last Modified By</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.LastModifiedBy) ? "—" : Model.LastModifiedBy)</dd>
+</dl>

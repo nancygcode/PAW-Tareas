@@ -1,0 +1,9 @@
+﻿@model PAW.Web.Models.DetailsWithProductsViewModel<PAW.Models.DTO.SupplierDTO>
+
+<h5 class="mb-3">Supplier</h5>
+<partial name="_SupplierDetails" model="Model.Item" />
+
+<hr />
+
+<h6 class="mb-2">Associated products (@Model.Products.Count)</h6>
+<partial name="~/Views/Product/_ProductsMini.cshtml" model="Model.Products" />
