@@ -15,7 +15,8 @@ internal static class RestProviderHelpers
 	/// <returns>A configured instance of <see cref="HttpClient"/>.</returns>
 	internal static HttpClient CreateHttpClient(string endpoint)
 	{
-		var client = new HttpClient { BaseAddress = new Uri(endpoint) };
+        var baseAddress = endpoint.EndsWith('/') ? endpoint : endpoint + "/";
+        var client = new HttpClient { BaseAddress = new Uri(endpoint) };
 		client.DefaultRequestHeaders.Accept.Clear();
 		client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 		return client;

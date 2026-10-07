@@ -184,7 +184,7 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
     /// Reads an entity of type T asynchronously.
     /// </summary>
     /// <returns>A task that represents the asynchronous operation. The task result contains a collection of entities.</returns>
-    public async Task<T> FindAsync(int id)
+    public virtual async Task<T> FindAsync(int id)
     {
         try
         {
