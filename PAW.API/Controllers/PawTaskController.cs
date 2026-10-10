@@ -6,31 +6,31 @@ namespace PAW.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ProductController(ILogger<ProductController> logger, IProductRepository repository) : ControllerBase
+public class PawTaskController(ILogger<PawTaskController> logger, IPawTaskRepository repository) : ControllerBase
 {
-    [HttpGet(Name = "GetProducts")]
-    public async Task<IEnumerable<ProductDTO>> GetAll()
+    [HttpGet(Name = "GetPawTasks")]
+    public async Task<IEnumerable<PawTaskDTO>> GetAll()
     {
         var items = await repository.ReadAsync() ?? [];
-        return items.Select(ProductDTO.ConvertFrom);
+        return items.Select(PawTaskDTO.ConvertFrom);
     }
 
-    [HttpGet("{id:int}", Name = "GetProductById")]
-    public async Task<ActionResult<ProductDTO>> GetById(int id)
+    [HttpGet("{id:int}", Name = "GetPawTaskById")]
+    public async Task<ActionResult<PawTaskDTO>> GetById(int id)
     {
         var item = await repository.FindAsync(id);
         if (item is null) return NotFound();
-        return ProductDTO.ConvertFrom(item);
+        return PawTaskDTO.ConvertFrom(item);
     }
 
-    [HttpPost(Name = "CreateProduct")]
-    public async Task<ActionResult<bool>> Create([FromBody] ProductDTO dto)
+    [HttpPost(Name = "CreatePawTask")]
+    public async Task<ActionResult<bool>> Create([FromBody] PawTaskDTO dto)
     {
-        return await repository.CreateAsync(ProductDTO.ConvertTo(dto));
+        return await repository.CreateAsync(PawTaskDTO.ConvertTo(dto));
     }
 
-    [HttpPut("{id:int}", Name = "UpdateProduct")]
-    public async Task<ActionResult<bool>> Update(int id, [FromBody] ProductDTO dto)
+    [HttpPut("{id:int}", Name = "UpdatePawTask")]
+    public async Task<ActionResult<bool>> Update(int id, [FromBody] PawTaskDTO dto)
     {
         var existing = await repository.FindAsync(id);
         if (existing is null) return NotFound();
@@ -39,7 +39,7 @@ public class ProductController(ILogger<ProductController> logger, IProductReposi
         return await repository.UpdateAsync(existing);
     }
 
-    [HttpDelete("{id:int}", Name = "DeleteProduct")]
+    [HttpDelete("{id:int}", Name = "DeletePawTask")]
     public async Task<ActionResult<bool>> Delete(int id)
     {
         var existing = await repository.FindAsync(id);

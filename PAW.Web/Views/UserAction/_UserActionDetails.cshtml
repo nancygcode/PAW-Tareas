@@ -1,0 +1,10 @@
+﻿@model PAW.Models.DTO.UserActionDTO
+
+<dl class="row mb-0">
+    <dt class="col-sm-4">Id</dt>
+    <dd class="col-sm-8">@Model.Id</dd>
+    <dt class="col-sm-4">Name</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Name) ? "—" : Model.Name)</dd>
+    <dt class="col-sm-4">Description</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Description) ? "—" : Model.Description)</dd>
+</dl>

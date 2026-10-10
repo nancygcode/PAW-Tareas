@@ -1,0 +1,20 @@
+﻿@model PAW.Models.DTO.PawTaskDTO
+
+<dl class="row mb-0">
+    <dt class="col-sm-4">Id</dt>
+    <dd class="col-sm-8">@Model.Id</dd>
+    <dt class="col-sm-4">Name</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Name) ? "—" : Model.Name)</dd>
+    <dt class="col-sm-4">Description</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Description) ? "—" : Model.Description)</dd>
+    <dt class="col-sm-4">Status</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.Status) ? "—" : Model.Status)</dd>
+    <dt class="col-sm-4">Due Date</dt>
+    <dd class="col-sm-8">@(Model.DueDate?.ToString("yyyy-MM-dd HH:mm") ?? "—")</dd>
+    <dt class="col-sm-4">Created At</dt>
+    <dd class="col-sm-8">@(Model.CreatedAt?.ToString("yyyy-MM-dd HH:mm") ?? "—")</dd>
+    <dt class="col-sm-4">Last Modified</dt>
+    <dd class="col-sm-8">@(Model.LastModified?.ToString("yyyy-MM-dd HH:mm") ?? "—")</dd>
+    <dt class="col-sm-4">Modified By</dt>
+    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.ModifiedBy) ? "—" : Model.ModifiedBy)</dd>
+</dl>

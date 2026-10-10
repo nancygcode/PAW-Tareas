@@ -25,8 +25,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="entitiesMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Entities
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="entitiesMenu">
+                                <li><h6 class="dropdown-header">Catalog</h6></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Product" asp-action="Index">Products</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Category" asp-action="Index">Categories</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Inventory" asp-action="Index">Inventory</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Supplier" asp-action="Index">Suppliers</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Component" asp-action="Index">Components</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><h6 class="dropdown-header">Security</h6></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">Users</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Role" asp-action="Index">Roles</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="UserRole" asp-action="Index">User Roles</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="UserAction" asp-action="Index">User Actions</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><h6 class="dropdown-header">General</h6></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="PawTask" asp-action="Index">Tasks</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Notification" asp-action="Index">Notifications</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -35,6 +55,20 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
+            @if (TempData["Success"] is string successMessage)
+            {
+                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    @successMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            @if (TempData["Error"] is string errorMessage)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    @errorMessage
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
             @RenderBody()
         </main>
     </div>
