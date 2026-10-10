@@ -33,7 +33,7 @@ namespace PAW.Web.Controllers
             var item = await _service.GetByIdAsync(id);
             if (item is null) return NotFound();
 
-            var products = (await _productService.GetProductsAsync())
+            var products = (await _productService.GetAllAsync())
                 .Where(p => p.CategoryId == id)
                 .OrderBy(p => p.ProductId)
                 .ToList();

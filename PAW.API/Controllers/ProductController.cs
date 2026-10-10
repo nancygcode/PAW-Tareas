@@ -1,50 +1,59 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PAW.DataAccess.Repositories;
+using PAW.Models;
 using PAW.Models.DTO;
 
-namespace PAW.API.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-public class ProductController(ILogger<ProductController> logger, IProductRepository repository) : ControllerBase
+namespace PAW.API.Controllers
 {
-    [HttpGet(Name = "GetProducts")]
-    public async Task<IEnumerable<ProductDTO>> GetAll()
+    [ApiController]
+    [Route("[controller]")]
+    public class ProductController(ILogger<ProductController> logger, IProductRepository productRepository) : ControllerBase
     {
-        var items = await repository.ReadAsync() ?? [];
-        return items.Select(ProductDTO.ConvertFrom);
-    }
+        [HttpGet(Name = "GetProducts")]
+        public async Task<IEnumerable<ProductDTO>> GetAll()
+        {
+            var products = await productRepository.ReadAsync() ?? [];
+            return products.Select(ProductDTO.ConvertFrom);
+        }
 
-    [HttpGet("{id:int}", Name = "GetProductById")]
-    public async Task<ActionResult<ProductDTO>> GetById(int id)
-    {
-        var item = await repository.FindAsync(id);
-        if (item is null) return NotFound();
-        return ProductDTO.ConvertFrom(item);
-    }
+        [HttpGet("{id:int}", Name = "GetProductById")]
+        public async Task<ActionResult<ProductDTO>> GetById(int id)
+        {
+            var product = await productRepository.FindAsync(id);
+            return ProductDTO.ConvertFrom(product);
+        }
 
-    [HttpPost(Name = "CreateProduct")]
-    public async Task<ActionResult<bool>> Create([FromBody] ProductDTO dto)
-    {
-        return await repository.CreateAsync(ProductDTO.ConvertTo(dto));
-    }
+        /*[HttpPost("filter", Name = "FilterProducts")]
+        public async Task<IEnumerable<Product>> Filter(ConditionViewModel condition)
+        {
+            var predicate = ConditionResolver<Product>.ResolveCondition(condition.Criteria, condition.Property, condition.Value, condition.Start, condition.End);
+            var results = await businessProduct.Filter(predicate);
+            return results;
+        }*/
 
-    [HttpPut("{id:int}", Name = "UpdateProduct")]
-    public async Task<ActionResult<bool>> Update(int id, [FromBody] ProductDTO dto)
-    {
-        var existing = await repository.FindAsync(id);
-        if (existing is null) return NotFound();
+        [HttpPost]
+        public async Task<bool> Save([FromBody] IEnumerable<Product> Products)
+        {
+            foreach (var p in Products)
+            {
+                if (p.ProductId > 0)
+                    await productRepository.CreateAsync(p);
+                else await productRepository.UpdateAsync(p);
+            }
 
-        dto.ApplyTo(existing);
-        return await repository.UpdateAsync(existing);
-    }
+            /*Products.ToList().ForEach(async x =>
+            {
+                if (x.Id > 0)
+                    await productRepository.CreateAsync(x);
+                else await productRepository.UpdateAsync(x);
+            });*/
+            return true;
+        }
 
-    [HttpDelete("{id:int}", Name = "DeleteProduct")]
-    public async Task<ActionResult<bool>> Delete(int id)
-    {
-        var existing = await repository.FindAsync(id);
-        if (existing is null) return NotFound();
-
-        return await repository.DeleteAsync(existing);
+        [HttpDelete]
+        public async Task<bool> Delete(Product Product)
+        {
+            return await productRepository.DeleteAsync(Product);
+        }
     }
 }

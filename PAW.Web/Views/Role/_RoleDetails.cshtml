@@ -1,8 +1,0 @@
-﻿@model PAW.Models.DTO.RoleDTO
-
-<dl class="row mb-0">
-    <dt class="col-sm-4">Role ID</dt>
-    <dd class="col-sm-8">@Model.RoleId</dd>
-    <dt class="col-sm-4">Role Name</dt>
-    <dd class="col-sm-8">@(string.IsNullOrWhiteSpace(Model.RoleName) ? "—" : Model.RoleName)</dd>
-</dl>

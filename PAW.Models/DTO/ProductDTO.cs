@@ -9,23 +9,17 @@ public class ProductDTO
     [JsonPropertyName("productId")]
     public int ProductId { get; set; }
     [JsonPropertyName("name")]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; }
     [JsonPropertyName("description")]
-    public string? Description { get; set; }
+    public string Description { get; set; }
     [JsonPropertyName("rating")]
     public int Rating { get; set; }
-    [JsonPropertyName("categoryId")]
-    public int? CategoryId { get; set; }
-    [JsonPropertyName("inventoryId")]
-    public int? InventoryId { get; set; }
-    [JsonPropertyName("supplierId")]
-    public int? SupplierId { get; set; }
     [JsonPropertyName("modifiedBy")]
     public string? ModifiedBy { get; set; }
     [JsonPropertyName("createdBy")]
     public string? CreatedBy { get; set; }
     [JsonPropertyName("comments")]
-    public string? Comments { get; set; }
+    public string Comments { get; set; }
     [JsonPropertyName("createdDate")]
     public DateTime CreatedDate { get; set; }
     [JsonPropertyName("modifiedDate")]
@@ -40,9 +34,6 @@ public class ProductDTO
             Name = product.ProductName!,
             Description = product.Description!,
             Rating = (int)(product.Rating ?? 0),
-            CategoryId = product.CategoryId,
-            InventoryId = product.InventoryId,
-            SupplierId = product.SupplierId,
             ModifiedBy = product.ModifiedBy,
             CreatedBy = product.CreatedBy,
             Comments = string.Empty, // Assuming comments are not present in the Product entity
@@ -52,31 +43,16 @@ public class ProductDTO
     }
 
     public static Product ConvertTo(ProductDTO productDTO)
-    {
-        return new Product
         {
-            ProductId = productDTO.ProductId,
-            ProductName = productDTO.Name,
-            Description = productDTO.Description,
-            Rating = productDTO.Rating,
-            CategoryId = productDTO.CategoryId,
-            InventoryId = productDTO.InventoryId,
-            SupplierId = productDTO.SupplierId,
-            ModifiedBy = productDTO.ModifiedBy,
-            CreatedBy = productDTO.CreatedBy,
-            LastModified = DateTime.Now
-        };
-    }
-
-    public void ApplyTo(Product e)
-    {
-        e.ProductName = Name;
-        e.Description = Description;
-        e.Rating = Rating;
-        e.CategoryId = CategoryId;
-        e.InventoryId = InventoryId;
-        e.SupplierId = SupplierId;
-        if (!string.IsNullOrWhiteSpace(ModifiedBy)) e.ModifiedBy = ModifiedBy;
-        e.LastModified = DateTime.Now;
+            return new Product
+            {
+                ProductId = productDTO.ProductId,
+                ProductName = productDTO.Name,
+                Description = productDTO.Description,
+                Rating = productDTO.Rating,
+                ModifiedBy = productDTO.ModifiedBy,
+                CreatedBy = productDTO.CreatedBy,
+                LastModified = productDTO.ModifiedDate
+            };
     }
 }

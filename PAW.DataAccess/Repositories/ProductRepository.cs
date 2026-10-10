@@ -18,3 +18,4 @@ public interface IProductRepository : IRepositoryBase<Product>
 public class ProductRepository : RepositoryBase<Product>, IProductRepository
 {
 }
+
